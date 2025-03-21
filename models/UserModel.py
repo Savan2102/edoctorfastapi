@@ -8,7 +8,7 @@ import bcrypt   #pip install bcrypt
 class User(BaseModel):
     firstName:str
     lastName:str
-    age:str
+    age:int
     status:bool
     role_id:str
     email:str

@@ -1,12 +1,12 @@
 from fastapi import FastAPI
-
 from routes.RoleRoutes import router as role_router
 from routes.UserRoutes import router as user_router
-#from routes.UserRoutes import router as
 from fastapi.middleware.cors import CORSMiddleware
 from routes.DoctorRoutes import router as doctor_router
-from routes.AppointmentRoutes import router as appointment_router
 from routes.AdminRoutes import router as admin_router
+from routes.AppointmentRoutes import router as appointment_router
+from routes.PrescriptionRoutes import router as prescription_router
+
 app = FastAPI()
 
 app.add_middleware(
@@ -21,8 +21,9 @@ app.add_middleware(
 app.include_router(role_router)
 app.include_router(user_router)
 app.include_router(doctor_router)
-app.include_router(appointment_router)
 app.include_router(admin_router)
+app.include_router(appointment_router)
+app.include_router(prescription_router)
 
 
 #routes
