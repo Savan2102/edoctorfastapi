@@ -15,12 +15,18 @@ class User(BaseModel):
     password:str
     
     #10,11,12,13,14,15,16,20,,,25,31
-    @validator("password",pre=True,always=True)
-    def encrypt_password(cls,v):
-        if v is None:
-            return None
-        return bcrypt.hashpw(v.encode("utf-8"),bcrypt.gensalt())
+    # @validator("password",pre=True,always=True)
+    # def encrypt_password(cls,v):
+    #     if v is None:
+    #         return None
+    #     return bcrypt.hashpw(v.encode("utf-8"),bcrypt.gensalt())
         
+@validator("password", pre=True)
+def encrypt_password(cls, v):
+        # Ensure password is in string format before encoding
+        if isinstance(v, bytes):  # If already in bytes, return as is
+            return v
+        return bcrypt.hashpw(v.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")  # Convert hash to string
     
     # @validator("role_id",pre=True,always=True)
     # def convert_objectId(cls,v):
@@ -51,4 +57,8 @@ class UserOut(User):
     
 class UserLogin(BaseModel):
     email:str
+    password:str    
+
+class ResetPasswordReq(BaseModel):
+    token:str
     password:str    

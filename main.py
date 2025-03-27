@@ -7,7 +7,10 @@ from routes.AdminRoutes import router as admin_router
 from routes.AppointmentRoutes import router as appointment_router
 from routes.PrescriptionRoutes import router as prescription_router
 
+
 app = FastAPI()
+
+
 
 app.add_middleware(
     CORSMiddleware,
